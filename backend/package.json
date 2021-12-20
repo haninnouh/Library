@@ -23,13 +23,10 @@
     "request": "^2.88.2"
   },
   "scripts": {
-    "test": "mocha",
-    "build": "cd frontend && npm run build",
-        "install-frontend": "cd frontend && npm install",
-        "heroku-postbuild": "npm run install-frontend && npm run build",
-        "server": "nodemon app.js",
-        "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix frontend\"",
-        "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix frontend\""
+    "start": "nodemon backend/app.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm start\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
     
   },
   "author": "",
