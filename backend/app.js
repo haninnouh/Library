@@ -16,7 +16,7 @@ const path = require("path");
 __dirname = path.resolve();
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/frontend/build")));
+  app.use(express.static(path.join(__dirname, "./frontend/build")));
 
   app.get("*", (req, res) =>
     res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
@@ -261,10 +261,11 @@ var ObjectId = require("mongodb").ObjectID;
 
 
 
-const PORT = process.env.PORT;
-app.listen(PORT);
+const PORT = process.env.PORT||3001; 
+app.listen(PORT, () => {
+  console.log(`server running on port ${PORT}`);
+});
 app.set("port",PORT);
-
 const connection = mongoose.connection;
 connection.once(
   "open",
