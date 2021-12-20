@@ -23,11 +23,7 @@
     "request": "^2.88.2"
   },
   "scripts": {
-    "start": "nodemon backend/app.js",
-    "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm start\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
-    
+    "test": "mocha"
   },
   "author": "",
   "license": "ISC"
