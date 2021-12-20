@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "* Install mongoose \r * Create app.js file and make the connection with mongoose\r * Create models folder that contain schema for author and book\r     * author schema:\r         1. name ==> type: string, required with message: \"Author name should be provided\"\r         2. age ==> type: Number, required with message: \"Author age should be provided\"\r         3. nationality ==> type: String, required with message: \"Author nationality should be provided\"\r         4. image ==> type: string, required with message: \"Author image should be provided\"\r         5. books",
   "main": "app.js",
+  "type": "module",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "chai": "^4.3.4",
@@ -21,6 +22,8 @@
   },
   "devDependencies": {
     "request": "^2.88.2"
+	  "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
   },
   "scripts": {
     "test": "mocha"
