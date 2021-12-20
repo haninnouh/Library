@@ -13,7 +13,19 @@ const app = express();
 var cors = require("cors");
 require("dotenv").config()
 const path = require("path");
-__dirname = path.resolve()
+__dirname = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/frontend/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running..");
+  });
+}
 // const uri =
 //   "mongodb+srv://hnooh:Ar648898@cluster0.mqfrq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 mongoose.connect( process.env.MONGODB_CONNECTION_STRING, {
@@ -247,12 +259,7 @@ var ObjectId = require("mongodb").ObjectID;
 //   console.log(`what was that book? ${book}`);
 // });
 
-// Step 1:
-app.use(express.static(path.resolve(__dirname, "./frontend/build")));
-// Step 2:
-app.get("*", function (request, response) {
-  response.sendFile(path.resolve(__dirname, "./frontend/build", "index.html"));
-});
+
 
 const PORT = process.env.PORT;
 app.listen(PORT);
