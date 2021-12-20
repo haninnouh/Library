@@ -253,8 +253,9 @@ app.use(express.static(path.resolve(__dirname, "/frontend/build")));
 app.get("*", function (request, response) {
   response.sendFile(path.resolve(__dirname, "frontend","build", "index.html"));
 });
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 app.listen(PORT);
+app.set("port",PORT);
 
 const connection = mongoose.connection;
 connection.once(
