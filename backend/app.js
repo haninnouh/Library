@@ -4,13 +4,14 @@ const seedAuthor = require("./author_seed");
 const Book = require("./models/bookAndAuthor").Book;
 const Author = require("./models/bookAndAuthor").Author;
 const authRouter = require("./routes/authRoute");
-const author = require("./routes/author");
+// const author = require("./routes/author");
 const express = require("express");
-const { requireAuth, checkAuthor } = require("./middleware/authMiddleware");
+// const { requireAuth, checkAuthor } = require("./middleware/authMiddleware");
 const app = express();
 //middleware manage the session and follow the user
-const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser");
 var cors = require("cors");
+
 const uri =
   "mongodb+srv://hnooh:Ar648898@cluster0.mqfrq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 mongoose.connect(uri, {
@@ -19,9 +20,9 @@ mongoose.connect(uri, {
 });
 app.use(express.json());
 app.use(cors());
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(authRouter);
-app.use(author);
+// app.use(author);
 
 // Author.insertMany(seedAuthor, (err, authors) => {
 //   if (err){ console.log(err)}
@@ -29,7 +30,7 @@ app.use(author);
 //     mongoose.connection.close();
 //   });
 
-app.get("*", checkAuthor);
+// app.get("*", checkAuthor);
 
 // app.get("/", function (req, res) {
 //   res.send("Hello from backend");
@@ -114,7 +115,7 @@ app.post("/book/:id", async (req, res) => {
   console.log("Added");
 });
 
-app.patch("/authors/:id", requireAuth, async (req, res) => {
+app.patch("/authors/:id", async (req, res) => {
   const allowedUpdates = ["name", "nationality", "authorImage", "password"];
   const updates = Object.keys(req.body);
   const isValidOperation = updates.every((update) =>
@@ -143,7 +144,7 @@ app.patch("/authors/:id", requireAuth, async (req, res) => {
   }
 });
 
-app.delete("/book/:authId/:bookId", requireAuth, async (req, res) => {
+app.delete("/book/:authId/:bookId", async (req, res) => {
   const bookId = req.params.bookId;
   try {
     const author = await Author.findById(req.params.authId);
