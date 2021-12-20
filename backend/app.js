@@ -13,7 +13,7 @@ const app = express();
 var cors = require("cors");
 require("dotenv").config()
 const path = require("path");
-
+__dirname = path.resolve()
 // const uri =
 //   "mongodb+srv://hnooh:Ar648898@cluster0.mqfrq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 mongoose.connect( process.env.MONGODB_CONNECTION_STRING, {
@@ -23,12 +23,7 @@ mongoose.connect( process.env.MONGODB_CONNECTION_STRING, {
 app.use(express.json());
 app.use(cors());
 // app.use(cookieParser());
-// Step 1:
-app.use(express.static(path.resolve(__dirname, "./frontend/build")));
-// Step 2:
-app.get("*", function (request, response) {
-  response.sendFile(path.resolve(__dirname, "./frontend/build", "index.html"));
-});
+
 app.use(authRouter);
 // app.use(author);
 
@@ -252,6 +247,12 @@ var ObjectId = require("mongodb").ObjectID;
 //   console.log(`what was that book? ${book}`);
 // });
 
+// Step 1:
+app.use(express.static(path.resolve(__dirname, "../frontend/build")));
+// Step 2:
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "../frontend/build", "index.html"));
+});
 const PORT = process.env.PORT || 3001;
 app.listen(PORT);
 
